@@ -10,6 +10,7 @@
 
 #include <sys/resource.h>
 #include <cstring>
+#include "commands.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ char* cmds[MAX_ARGS + 1];
 
 int main(){
 
+	vector<int> *pTable = new vector<int>;
 	bool loop = true;
 	//input loop 
 	while (loop) {
@@ -33,7 +35,8 @@ int main(){
 		cin.getline(input, sizeof(input));
 
 		//parse input into an array of commands
-		char* token; 
+		char* token = strtok(input, " \t\n");
+
 
 		int x = 0;
 		while (token != NULL){
@@ -41,15 +44,20 @@ int main(){
 			cmds[x++] = token;
 			token = strtok(NULL, " \t\n");
 		}
+		
 		cmds[x] = NULL;
-
+		
 		if (cmds[0] != NULL){
-			if (strcmp(cmds[0],"jobs")){
-				
+			if (strcmp(cmds[0],"jobs") == 0){
+				//printf("%s\n", cmds[0]);
+				jobs(pTable);
+			}
+			else {
+
+				command(pTable, cmds);	
 			}
 		}
-
-
+	
 	}
 
 

@@ -15,8 +15,8 @@
 #include <sys/resource.h>
 #include <cstring>
 #include "commands.h"
-
 using namespace std;
-void jobs(vector<int> *ptable);
-void command(vector<int> *ptable, char* cmds[]);
+void jobs(vector<int> *pTable);
+void command(vector<int> *pTable, char* cmds[]);
+void printTime();
 #endif

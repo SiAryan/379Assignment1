@@ -15,9 +15,26 @@
 
 using namespace std;
 
-void jobs(vector<int> *ptable){
+void jobs(vector<int> *pTable){
 	printf("%s\n", "Running Processes:");
+	int num_jobs = 0;
 
+	for (int i = 0; i < pTable->size(); i++){
+		num_jobs = (kill((*pTable)[i], 0) == 0) ? num_jobs++ : num_jobs; 
+
+	}
+	
+	printf("Processes =     %d active\n", num_jobs);
+	printTime();
+}
+
+void printTime(){
+	struct rusage rusage;
+	int who = RUSAGE_CHILDREN;
+	getrusage(who, &rusage);
+	printf("%s\n", "Completed processes:");
+	printf("User time =     %ld seconds\n", rusage.ru_utime.tv_sec);
+	printf("Sys  time =     %ld seconds\n", rusage.ru_stime.tv_sec);
 }
 
 
