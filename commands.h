@@ -17,6 +17,6 @@
 #include "commands.h"
 using namespace std;
 void jobs(vector<int> *pTable);
-void command(vector<int> *pTable, char* cmds[]);
+void command(vector<int> *pTable, char* cmds[],int x);
 void printTime();
 #endif

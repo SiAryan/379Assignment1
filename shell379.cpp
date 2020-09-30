@@ -53,8 +53,7 @@ int main(){
 				jobs(pTable);
 			}
 			else {
-
-				command(pTable, cmds);	
+				command(pTable, cmds, x);	
 			}
 		}
 	
