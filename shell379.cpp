@@ -18,34 +18,38 @@ const int MAX_ARGS = 7;
 const int MAX_LENGTH = 20;
 const int MAX_PT_ENTRIES = 32;
 
+char input[LINE_LENGHT];
+char* cmds[MAX_ARGS + 1];
+
 int main(){
 
-	char input[LINE_LENGHT];
-	char* args[MAX_ARGS+1];
-	
 	bool loop = true;
 	//input loop 
-	while (loop){
-
+	while (loop) {
+		//clear command array 
+		memset(cmds, 0, sizeof(cmds));
 		printf("shell379: ");
+		//get input 
 		cin.getline(input, sizeof(input));
-		char* arg = strtok(input, " \t\n");
 
+		//parse input into an array of commands
+		char* token; 
 
 		int x = 0;
-		
-
-		while (arg != NULL){
-			arg = strtok(NULL, " \t\n");
-			printf("%s\n", arg);
-			args[x] = arg;
-			x++;
+		while (token != NULL){
+			//printf("%s\n", token);
+			cmds[x++] = token;
+			token = strtok(NULL, " \t\n");
 		}
-		if (strcmp(arg, "exit") == 0){
-			loop = false;
+		cmds[x] = NULL;
 
-		}		
+		if (cmds[0] == NULL){
+			printf("%s\n", "") 
+		}
+
+
 	}
-	
+
+
 }
 
