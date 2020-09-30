@@ -40,7 +40,7 @@ void printTime(){
 
 void command(vector<int> *pTable, char* cmds[],int x){
 	int wstatus;
-	pid_t waitNewProcess;
+	pid_t waitfornew;
 				
 	int new_pid = fork();
 	if (new_pid == 0){
@@ -54,16 +54,17 @@ void command(vector<int> *pTable, char* cmds[],int x){
 
 		} else {
 			
-			do{
-				//waitpid(pid_t pid, int *wwstatus, int options)
-				waitNewProcess = waitpid(new_pid, &wstatus, WUNTRACED);
-			}while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
+			do {waitfornew = waitpid(new_pid, &wstatus, WUNTRACED);}
+			while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
 
-			pTable->pop_back();
-		}
-	} else if (new_pid < 0){
-		perror("An error has occured when attempting to fork.");
+		pTable->pop_back();
+		
+		} 
 	}
-
+		
+	else if (new_pid < 0){
+		perror("Forking error!");
+	}	
+	
 }
 
