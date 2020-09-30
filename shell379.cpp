@@ -43,8 +43,10 @@ int main(){
 		}
 		cmds[x] = NULL;
 
-		if (cmds[0] == NULL){
-			printf("%s\n", "") 
+		if (cmds[0] != NULL){
+			if (strcmp(cmds[0],"jobs")){
+				
+			}
 		}
 
 
