@@ -49,12 +49,33 @@ int main(){
 		cmds[x] = NULL;
 		
 		if (cmds[0] != NULL){
-			if (strcmp(cmds[0],"jobs") == 0){
+			if (strcmp(cmds[0],"jobs") == 0) 
+			{
 				//printf("%s\n", cmds[0]);
 				jobs(pTable);
 			}
-			else if (strcmp(cmds[0], "exit") == 0){
+			else if (strcmp(cmds[0], "exit") == 0) 
+			{
 				exitshell(pTable);
+			}
+			else if (strcmp(cmds[0], "sleep") == 0) 
+			{
+				sleepProcess(cmds);
+			}
+			else if (strcmp(cmds[0], "suspend") == 0)
+			{
+				suspendProcess(cmds);
+			}
+			else if (strcmp(cmds[0], "resume") == 0)
+			{
+				resumeProcess(cmds);
+			}
+			else if (strcmp(cmds[0], "kill") == 0)
+			{
+				killProcess(cmds);
+			}
+			else if (strcmp(cmds[0], "wait") == 0){
+				waitProcess(cmds);
 			}
 			else {
 				command(pTable, cmds, x);	

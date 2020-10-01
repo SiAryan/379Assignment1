@@ -20,4 +20,10 @@ using namespace std;
 void jobs(vector<int> *pTable);
 void command(vector<int> *pTable, char* cmds[],int x);
 void exitshell(vector<int> *pTable);
+void sleepProcess(char *cmds[]);
+void waitProcess(char *cmds[]);
+void killProcess(char *cmds[]);
+void suspendProcess(char *cmds[]);
+void resumeProcess(char *cmds[]);
+
 #endif

@@ -39,12 +39,34 @@ void jobs(vector<int> *pTable){
 	time();
 }
 
+void sleepProcess(char *cmds[]){
+	sleep(stoi(cmds[1]));
+}
 
+void suspendProcess(char *cmds[]){
+	kill(stoi(cmds[1]), SIGSTOP);
+}
+
+void resumeProcess(char *cmds[]){
+	kill(stoi(cmds[1]), SIGCONT);
+}
+
+void waitProcess(char *cmds[]){
+	waitpid(stoi(cmds[1]), NULL, 0);
+}
+
+void killProcess(char *cmds[]){
+	kill(stoi(cmds[1]) ,SIGKILL);
+}
 
 
 void command(vector<int> *pTable, char* cmds[],int x){
 	int wstatus;
 	pid_t waitfornew;
+
+	int stime;
+	int utime;
+
 				
 	int new_pid = fork();
 	if (new_pid == 0){
@@ -69,7 +91,6 @@ void command(vector<int> *pTable, char* cmds[],int x){
 		perror("Forking error!");
 	}
 	//printf("%s\n", "shell379: ");	
-	
 }
 
 void exitshell(vector<int> *pTable){

@@ -20,5 +20,5 @@ void time(){
 	printf("User time =     %ld seconds\n", usage.ru_utime.tv_sec);
 	printf("Sys  time =     %ld seconds\n", usage.ru_stime.tv_sec);
 	//printf("%s\n", "check");
-
 }
+
