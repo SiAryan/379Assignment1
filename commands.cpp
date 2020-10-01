@@ -12,30 +12,34 @@
 #include <cstring>
 
 #include "commands.h"
-
+#include "getProcess.h"
 using namespace std;
+
+
+struct rusage ru;
+struct timeval user_time, system_time;
 
 void jobs(vector<int> *pTable){
 	printf("%s\n", "Running Processes:");
 	int num_jobs = 0;
 
 	for (int i = 0; i < pTable->size(); i++){
-		num_jobs = (kill((*pTable)[i], 0) == 0) ? num_jobs++ : num_jobs; 
+		int w = kill((*pTable)[i], 0);
+		num_jobs = (w == 0) ? 1 : num_jobs; 
+		printf("%d\n", w);
+	}
+	if (num_jobs > 0){
+		for (int i = 0; i < pTable->size(); i++){
 
+		}
 	}
 
+	//printf("%d\n",num_jobs);
 	printf("Processes =     %d active\n", num_jobs);
-	printTime();
+	time();
 }
 
-void printTime(){
-	struct rusage rusage;
-	int who = RUSAGE_CHILDREN;
-	getrusage(who, &rusage);
-	printf("%s\n", "Completed processes:");
-	printf("User time =     %ld seconds\n", rusage.ru_utime.tv_sec);
-	printf("Sys  time =     %ld seconds\n", rusage.ru_stime.tv_sec);
-}
+
 
 
 void command(vector<int> *pTable, char* cmds[],int x){
@@ -56,15 +60,33 @@ void command(vector<int> *pTable, char* cmds[],int x){
 			
 			do {waitfornew = waitpid(new_pid, &wstatus, WUNTRACED);}
 			while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
-
-		pTable->pop_back();
+			pTable->pop_back();
 		
 		} 
 	}
 		
 	else if (new_pid < 0){
 		perror("Forking error!");
-	}	
+	}
+	//printf("%s\n", "shell379: ");	
 	
 }
 
+void exitshell(vector<int> *pTable){
+	int wstatus;
+	pid_t waitfornew;
+	for(int i = 0; i < pTable->size(); i++){
+		int w = kill((*pTable)[0],0);
+		if (w == 0){
+			do {waitfornew = waitpid((*pTable)[i], &wstatus, WUNTRACED);}
+			while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
+			
+		}else if (w == ESRCH){
+			pTable->erase(pTable->begin() + i);
+		}
+		else{
+			printf("%s\n", "error");
+		}
+	}	
+	exit(0);
+}

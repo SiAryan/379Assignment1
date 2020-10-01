@@ -1,6 +1,5 @@
-#ifndef _COMMANDS_H_
-#define _COMMANDS_H_ 
-
+#ifndef _EXIT_H
+#define _EXIT_H
 
 #include <iostream>
 #include <stdio.h>
@@ -14,10 +13,7 @@
 
 #include <sys/resource.h>
 #include <cstring>
-#include "commands.h"
 
 using namespace std;
-void jobs(vector<int> *pTable);
-void command(vector<int> *pTable, char* cmds[],int x);
-void exitshell(vector<int> *pTable);
+void time();
 #endif

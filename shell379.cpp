@@ -25,6 +25,7 @@ char* cmds[MAX_ARGS + 1];
 int main(){
 
 	vector<int> *pTable = new vector<int>;
+	//pTable->push_back(1);
 	bool loop = true;
 	//input loop 
 	while (loop) {
@@ -52,11 +53,15 @@ int main(){
 				//printf("%s\n", cmds[0]);
 				jobs(pTable);
 			}
+			else if (strcmp(cmds[0], "exit") == 0){
+				exitshell(pTable);
+			}
 			else {
 				command(pTable, cmds, x);	
 			}
+		
 		}
-	
+		
 	}
 
 
