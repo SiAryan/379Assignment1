@@ -86,12 +86,15 @@ int processInfo(int pid){
 		while((w = fgetc(file)) != EOF){
 			out += (char)w;
 		}
+		
+		if (pclose(file)){
+		perror("Pipe error\n");
+		}
+
 	}
 	cout << out << ends;
 	
-	if (pclose(file)){
-		perror("Pipe error\n");
-	}
+	
 
 	printf("\n");
 	return 1;

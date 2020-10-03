@@ -24,7 +24,7 @@ void jobs(vector<int> *pTable){
 		int w = kill((*pTable)[i], 0);
 		
 		if (w==0){
-			int x = killZombie((*pTable)[0]);
+			int x = killZombie((*pTable)[i]);
 			num_jobs = (x == 1) ? 1 + num_jobs : num_jobs; 	
 		}
 	}
