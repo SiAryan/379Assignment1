@@ -25,5 +25,6 @@ void waitProcess(char *cmds[]);
 void killProcess(char *cmds[]);
 void suspendProcess(char *cmds[]);
 void resumeProcess(char *cmds[]);
+void time();
 
 #endif

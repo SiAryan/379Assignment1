@@ -11,6 +11,7 @@
 #include <sys/resource.h>
 #include <cstring>
 #include "commands.h"
+#include "getProcess.h"
 
 using namespace std;
 
@@ -53,10 +54,12 @@ int main(){
 			{
 				//printf("%s\n", cmds[0]);
 				jobs(pTable);
+				//time();
 			}
 			else if (strcmp(cmds[0], "exit") == 0) 
 			{
 				exitshell(pTable);
+				//loop = false;
 			}
 			else if (strcmp(cmds[0], "sleep") == 0) 
 			{
@@ -79,12 +82,13 @@ int main(){
 			}
 			else {
 				command(pTable, cmds, x);	
+			
 			}
 		
 		}
 		
 	}
 
-
+	
 }
 

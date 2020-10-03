@@ -16,9 +16,6 @@
 using namespace std;
 
 
-struct rusage ru;
-struct timeval user_time, system_time;
-
 void jobs(vector<int> *pTable){
 	printf("%s\n", "Running Processes:");
 	int num_jobs = 0;
@@ -77,8 +74,8 @@ void command(vector<int> *pTable, char* cmds[],int x){
 	int wstatus;
 	pid_t waitfornew;
 
-	int stime;
-	int utime;
+	//int stime;
+	//int utime;
 
 				
 	int new_pid = fork();
@@ -104,6 +101,7 @@ void command(vector<int> *pTable, char* cmds[],int x){
 		perror("Forking error!");
 	}
 	//printf("%s\n", "shell379: ");	
+
 }
 
 void exitshell(vector<int> *pTable){
