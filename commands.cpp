@@ -25,14 +25,27 @@ void jobs(vector<int> *pTable){
 
 	for (int i = 0; i < pTable->size(); i++){
 		int w = kill((*pTable)[i], 0);
-		num_jobs = (w == 0) ? 1 : num_jobs; 
-		printf("%d\n", w);
-	}
-	if (num_jobs > 0){
-		for (int i = 0; i < pTable->size(); i++){
-
+		
+		if (w==0){
+			int x = killZombie((*pTable)[0]);
+			num_jobs = (x == 1) ? 1 + num_jobs : num_jobs; 	
 		}
 	}
+	
+	if (num_jobs > 0){
+		printf("%s\n", "#    PID S SEC COMMAND");
+		for (int i = 0; i < pTable->size(); i++){
+			int w = kill((*pTable)[i],0);
+			if (w==0){
+				processInfo((*pTable)[i]);
+			}else if (w == ESRCH){
+				pTable->erase(pTable->begin() + i);
+			}else{
+				//printf("%s\n", "pipe info error\n");
+			}
+		}
+	}
+	
 
 	//printf("%d\n",num_jobs);
 	printf("Processes =     %d active\n", num_jobs);
@@ -97,7 +110,7 @@ void exitshell(vector<int> *pTable){
 	int wstatus;
 	pid_t waitfornew;
 	for(int i = 0; i < pTable->size(); i++){
-		int w = kill((*pTable)[0],0);
+		int w = kill((*pTable)[i],0);
 		if (w == 0){
 			do {waitfornew = waitpid((*pTable)[i], &wstatus, WUNTRACED);}
 			while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
@@ -106,7 +119,8 @@ void exitshell(vector<int> *pTable){
 			pTable->erase(pTable->begin() + i);
 		}
 		else{
-			printf("%s\n", "error");
+			//printf("%s\n", "error");
+			kill((*pTable)[i], SIGKILL);
 		}
 	}	
 	exit(0);

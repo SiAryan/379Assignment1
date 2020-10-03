@@ -16,4 +16,6 @@
 
 using namespace std;
 void time();
+int killZombie(int pid);
+int processInfo(int pid);
 #endif
